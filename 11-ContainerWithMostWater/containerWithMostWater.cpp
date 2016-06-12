@@ -1,17 +1,29 @@
 #define MAX(a,b) ((a) > (b) ? (a) : (b))
+#define MIN(a,b) ((a) < (b) ? (a) : (b))
+#define WHICH(a,b) ((a) > (b) ? (0) : (1))
 class Solution {
 public:
     int maxArea(vector<int>& height) {
         int size = height.size();
-        int max_area = 0;
-        int curr;
-        for (int i = 0; i < size-1; i++) {
-            for (int k = i; k< size; k++) {
-                curr =MAX(height[i], height[k])*(k-i);
-                if (max_area > curr)
-                    max_area = curr;
+        if (size == 0)
+        return 0;
+        int i = 0;
+        int j = size-1;
+        int max_area = MIN(height[i],height[j])*j;
+        int area;
+        while (j != i) {
+            area = MIN(height[i],height[j])*(j-i);
+            if (area > max_area){
+                max_area = area;
+                
             }
+            if (WHICH(height[i],height[j])) {
+                i++;
+            } else {
+                j--;
+            }
+            
         }
-        return curr;
+        return max_area;
     }
 };
