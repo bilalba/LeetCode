@@ -8,9 +8,15 @@ public:
         for (int i = 0; i < s.size(); i++) {
             if (map.count(s[i]) != 0) { //already exists.
                 int last_pos = map[s[i]]; // we have this elements last pos.
-                for (int j = lower; j < last_pos+1; j++) {
-                    map.erase(s[j]);
-                }
+                if (last_pos+1 == i)
+                    map.clear();
+                else if (lower == last_pos)
+                 // do nohing.;
+                 ;
+                else
+                    for (int j = lower; j < last_pos+1; j++) {
+                        map.erase(s[j]);
+                    }
                 lower = last_pos+1;
                 map[s[i]]= i;
             } else {
