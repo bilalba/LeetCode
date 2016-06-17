@@ -9,18 +9,24 @@
 class Solution {
 public:
     bool hasCycle(ListNode *head) {
-        map<ListNode*, int> map;
         if (!head)
             return false;
-        ListNode* temp = head;
-        map[head] = 1;
-        while (temp->next) {
-            if (map.count(temp->next) != 0)
-                return true;
-            map[temp] = 1;
-            temp = temp->next;
-            
+        ListNode* slow = head->next;
+        ListNode* fast = head->next;
+        if (!fast)
+            return false;
+        fast = fast->next;
+        
+        while (fast != slow) {
+            if (slow->next)
+                slow = slow->next;
+            else return false;
+            if (fast->next) {
+                if (fast->next->next) {
+                    fast = fast->next->next;
+                } else return false;
+            } else return false;
         }
-        return false;
+        return true;
     }
 };
