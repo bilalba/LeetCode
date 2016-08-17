@@ -25,7 +25,7 @@ public:
             int size_val = index_key[size-1]; // value of max index.
             
             multimap<int,int>::iterator k = key_index.find(size_val);
-            key_index.erase(k);
+            key_index.erase(k); // error here. what if this is not the iterator with size-1 val.
             
             key_index.insert(pair<int,int>(size_val,index));
             index_key[index] = size_val;
